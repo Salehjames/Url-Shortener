@@ -1,51 +1,47 @@
-# main.py
-
 from fastapi import FastAPI, HTTPException, Depends
-from models import Base, engine, SessionLocal, URL
-from schemas import ShortenURLRequest
-from sqlalchemy.orm import Session  # Import Session from SQLAlchemy
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
-from fastapi.staticfiles import StaticFiles
-from starlette.middleware.cors import CORSMiddleware
-from typing import List
-from starlette.responses import FileResponse
+import secrets
 
 app = FastAPI()
 
-# Create database tables
-Base.metadata.create_all(bind=engine)
+class URLItem(BaseModel):
+    original_url: str
 
-# Dependency to get database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+url_database = {}
 
-# Endpoint to shorten a URL
-@app.post("/shorten/")
-async def shorten_url(request: ShortenURLRequest, db: Session = Depends(get_db)):
-    # Generate a shortened URL (for demonstration, use original URL as shortened URL)
-    shortened_url = request.original_url
-
-    # Store URL mapping in database
-    db_url = URL(original_url=request.original_url, shortened_url=shortened_url)
-    db.add(db_url)
-    db.commit()
-    db.refresh(db_url)
-
-    return {"shortened_url": shortened_url}
-
-# Serve frontend files from the 'src' directory
-app.mount("/", StaticFiles(directory="Components"), name="static")
-
-# Enable CORS
+origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+def generate_short_url():
+    return secrets.token_urlsafe(6)
+
+@app.post("/shorten/")
+def shorten_url(url_item: URLItem):
+    # Generate a short URL using secrets module
+    short_url = generate_short_url()
+
+    # Store the mapping between short URL and original URL in the database
+    url_database[short_url] = url_item.original_url
+
+    # Return the short URL in the response
+    return {"short_url": short_url}
+
+@app.get("/{short_url}")
+def redirect_to_original(short_url: str):
+    # Retrieve the original URL from the database
+    original_url = url_database.get(short_url)
+
+    # If the original URL exists, redirect to it
+    if original_url:
+        return RedirectResponse(url=original_url)
+    else:
+        # If the short URL is not found in the database, return an error response
+        raise HTTPException(status_code=404, detail="URL not found")

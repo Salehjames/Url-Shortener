@@ -12,11 +12,11 @@ function App() {
   const [originalUrl, setOriginalUrl] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   const handleShortenUrl = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/shorten/', {  // Update the endpoint URL
+      const response = await fetch('http://localhost:8000/shorten/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -29,25 +29,20 @@ function App() {
       const data = await response.json();
       setShortenedUrl(data.shortened_url);
     } catch (error) {
-      console.error('Error shortening URL:', error.message);
+      console.error('Error while shortening URL:', error.message);
     } finally {
       setLoading(false);
     }
   };
-  
 
+  
   return (
     <>
       <Navbar/>
-
       <Hero/>
-
       <Free/>
-
       <Collaborate/>
-
       <Footer/>
-
       <div className="url-shortener">
         <input
           type="text"
