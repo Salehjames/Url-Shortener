@@ -45,3 +45,7 @@ def redirect_to_original(short_url: str):
     else:
         # If the short URL is not found in the database, return an error response
         raise HTTPException(status_code=404, detail="URL not found")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
