@@ -1,3 +1,5 @@
+import ru from "../assets/RU.png"
+
 const Footer = () => {
   return (
     <>
@@ -37,7 +39,7 @@ const Footer = () => {
 
         <span className="flex items-center lg:gap-6 lg:w-1/2 lg:justify-end">
           <h4>Report</h4>
-          <img src="src/assets/RU.png" alt="" />
+          <img src={ru} alt="" />
           <h4>RU</h4>
         </span>
       </div>

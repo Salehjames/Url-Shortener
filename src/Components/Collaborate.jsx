@@ -1,8 +1,10 @@
+import invite from "../assets/Invite.png";
+
 const Collaborate = () => {
   return (
     <>
       <div className="flex flex-col  lg:flex-row justify-center items-center gap-32 px-4 md:px-0">
-        <img className="" src="src/assets/Invite.png" alt="" />
+        <img className="" src={invite} alt="" />
         <div>
           <div>
             <h4 className="bg-[#F7F9FC] w-fit p-1 text-[#0088FF]">
