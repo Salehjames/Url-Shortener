@@ -1,3 +1,6 @@
+import symbol from "../assets/Symbol.png"
+import heroimg from "../assets/div.col-md.png"
+
 const Hero = () => {
   return (
     <div className="container mx-auto px-4 md:px-0 my-20">
@@ -32,17 +35,17 @@ const Hero = () => {
 
             <div className="px-4">
               <span className="flex items-center gap-2 py-1">
-                <img src="src/assets/Symbol.png" alt="" />
+                <img src={symbol} alt="" />
                 <h4>Start free, upgrade later</h4>
               </span>
 
               <span className="flex items-center gap-2 py-1">
-                <img src="src/assets/Symbol.png" alt="" />
+                <img src={symbol} alt="" />
                 <h4>No credit card required</h4>
               </span>
 
               <span className="flex items-center gap-2 py-1">
-                <img src="src/assets/Symbol.png" alt="" />
+                <img src={symbol} alt="" />
                 <h4>Easy to use</h4>
               </span>
             </div>
@@ -52,7 +55,7 @@ const Hero = () => {
         <div className="hidden lg:flex">
           <img
             className="h-[30rem] w-[25rem]"
-            src="src/assets/div.col-md-10.png"
+            src={heroimg}
             alt=""
           />
         </div>
