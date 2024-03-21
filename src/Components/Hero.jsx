@@ -1,5 +1,5 @@
 import symbol from "../assets/Symbol.png"
-import heroimg from "../assets/div.col-md.png"
+import heroimg from "../assets/div.col-md-10.png"
 
 const Hero = () => {
   return (
