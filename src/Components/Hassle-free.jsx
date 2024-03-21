@@ -1,8 +1,13 @@
+import section from "../assets/Section.png";
+import shortlinks from "../assets/ShortLinks.png";
+import qr from "../assets/QR.png";
+import pages from "../assets/pages.png";
+
 const Free = () => {
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-center items-center gap-32 px-4 md:px-0">
-        <img className="w-96 h-96" src="src/assets/Section.png" alt="" />
+        <img className="w-96 h-96" src={section} alt="" />
         <div className="flex flex-col gap-6">
           <h4 className="bg-[#F7F9FC] w-fit p-1 text-[#0088FF]">
             Collect data within minutes. Hassel Free!
@@ -23,7 +28,7 @@ const Free = () => {
             <span className="flex items-center gap-3">
               <img
                 className="bg-[#F7F9FC] py-2 px-4 rounded-md"
-                src="src/assets/ShortLinks.png"
+                src={shortlinks}
                 alt=""
               />
 
@@ -41,7 +46,7 @@ const Free = () => {
             <span className="flex items-center gap-3">
               <img
                 className="bg-[#F7F9FC] py-2 px-4 rounded-md"
-                src="src/assets/QR.png"
+                src={qr}
                 alt=""
               />
 
